@@ -1,28 +1,38 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+class App extends React.Component{
+  constructor(){
+    super()
+    this.state={
+      rating:Array(5).fill(null),
+      star:[]
+    }
+  }
+  handleClick(index){
+    let newRating= []
+    for(let i=0;i<=index;i++){
+      newRating[i]="hello"
+      this.setState({star:newRating})
+    }
+  }
 
-class App extends Component {
+  renderStars(){
+    return this.state.rating.map(
+    (A,index)=>
+    <span key={index}
+            onClick={()=>this.handleClick(index)}
+            className={`${this.state.star[index] === 'hello'?'hello':'box'}`}
+    >*</span>
+    )
+    
+    
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <h1>  {this.renderStars()}</h1>
       </div>
     );
   }
 }
-
 export default App;
